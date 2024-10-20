@@ -1,0 +1,23 @@
+sfinge_notas_fiscais_schema = {
+    "CHAVE DE ACESSO": "String",
+    "MODELO": "String",
+    "SÉRIE": "String",
+    "NÚMERO": "String",
+    "NATUREZA DA OPERAÇÃO": "String",
+    "DATA EMISSÃO": "Date",
+    "EVENTO MAIS RECENTE": "String",
+    "DATA/HORA EVENTO MAIS RECENTE": "Timestamp",
+    "CPF/CNPJ Emitente": "String",
+    "RAZÃO SOCIAL EMITENTE": "String",
+    "INSCRIÇÃO ESTADUAL EMITENTE": "String",
+    "UF EMITENTE": "String",
+    "MUNICÍPIO EMITENTE": "String",
+    "CNPJ DESTINATÁRIO": "String",
+    "NOME DESTINATÁRIO": "String",
+    "UF DESTINATÁRIO": "String",
+    "INDICADOR IE DESTINATÁRIO": "String",
+    "DESTINO DA OPERAÇÃO": "String",
+    "CONSUMIDOR FINAL": "String",
+    "PRESENÇA DO COMPRADOR": "String",
+    "VALOR NOTA FISCAL": "Decimal"
+}

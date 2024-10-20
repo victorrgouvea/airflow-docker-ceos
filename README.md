@@ -14,7 +14,7 @@ Airflow templates repository to be used in CEOS project
 
 5 - dentro da pasta raiz clonada, abra um terminal e digite `docker-compose up airflow-init`. Isto instalará o airflow no docker
 
-6 - finalizada a instalação, digitar `docker-compose up`  no terminal - isso vai levantar o airflow no localhost
+6 - finalizada a instalação, digitar `docker-compose up`  no terminal - isso vai levantar o airflow no localhost, assim como postgres, iceberg e spark, em seus devidos lugares
 
 7 - em um navegador, digitar `localhost:8080` - usuário e senha são `airflow`
 

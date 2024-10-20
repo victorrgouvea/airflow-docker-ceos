@@ -49,8 +49,8 @@ x-airflow-common:
   # In order to add custom dependencies or upgrade provider packages you can use your extended image.
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.10.2}
-  # build: .
+  # image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.10.2}
+  build: .
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
@@ -73,11 +73,13 @@ x-airflow-common:
     # The following line can be used to set a custom config file, stored in the local config folder
     # If you want to use it, outcomment it and replace airflow.cfg with the name of your config file
     # AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+    PYTHONPATH: /opt/airflow/dags
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+    - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -290,9 +292,9 @@ services:
   spark-iceberg:
     image: tabulario/spark-iceberg
     container_name: spark-iceberg
-    build: spark/
-    networks:
-      iceberg_net:
+    # build: spark/
+    # networks:
+    #   iceberg_net:
     depends_on:
       - rest
       - minio
@@ -310,8 +312,8 @@ services:
   rest:
     image: tabulario/iceberg-rest
     container_name: iceberg-rest
-    networks:
-      iceberg_net:
+    # networks:
+    #   iceberg_net:
     ports:
       - 8181:8181
     environment:
@@ -328,10 +330,10 @@ services:
       - MINIO_ROOT_USER=admin
       - MINIO_ROOT_PASSWORD=password
       - MINIO_DOMAIN=minio
-    networks:
-      iceberg_net:
-        aliases:
-          - warehouse.minio
+    # networks:
+    #   iceberg_net:
+    #     aliases:
+    #       - warehouse.minio
     ports:
       - 9001:9001
       - 9000:9000
@@ -341,8 +343,8 @@ services:
       - minio
     image: minio/mc
     container_name: mc
-    networks:
-      iceberg_net:
+    # networks:
+    #   iceberg_net:
     environment:
       - AWS_ACCESS_KEY_ID=admin
       - AWS_SECRET_ACCESS_KEY=password
@@ -355,8 +357,8 @@ services:
       /usr/bin/mc policy set public minio/warehouse;
       tail -f /dev/null
       "
-networks:
-  iceberg_net:
+# networks:
+#   iceberg_net:
 
 volumes:
   postgres-db-volume:
